@@ -10,7 +10,6 @@ public class PrizeCategories {
         this.playerPrizeInventoryQuantity[0] = 0;
         this.playerPrizeInventoryQuantity[1] = 0;
         this.playerPrizeInventoryQuantity[2] = 0;
-
         this.arcadePrizeInventoryQuantity[0] = 20;
         this.arcadePrizeInventoryQuantity[1] = 20;
         this.arcadePrizeInventoryQuantity[2] = 20;
