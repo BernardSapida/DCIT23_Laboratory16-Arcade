@@ -7,6 +7,7 @@ public class Games {
         private int scoreComputer = 0;
         private String[] choice= {"ROCK", "PAPER", "SCISSOR"};
         private String winnerPlayer = "";
+        public Scanner sc = new Scanner(System.in);
     
         // Instantiating Class
         Rps() {
@@ -23,26 +24,24 @@ public class Games {
     
         // Start the RPS Game
         public void startRps() {
-            try (Scanner in = new Scanner(System.in)) {
-                while(winnerPlayer.equals("")) {
-                    String computerResponse = computerChoice();
-   
-                    System.out.print("\n########################################################################################################\n");
-                    System.out.print("\nYour response (Rock, Paper, Scissor): ");
-                    String playerResponse = in.nextLine().toUpperCase();
-   
-                    while(!Pattern.compile("^(ROCK|PAPER|SCISSOR)$").matcher(playerResponse).find()) {
-                        System.out.println("Your response is invalid!\n");
-                        System.out.print("Your response (Rock, Paper, Scissor): ");
-                        playerResponse = in.nextLine().toUpperCase();
-                    }
-   
-                    System.out.println("You choose: " + playerResponse);
-                    System.out.println("Computer choose: " + computerResponse);
-                    getDecision(playerResponse, computerResponse);
-   
-                    getWinner();
+            while(winnerPlayer.equals("")) {
+                String computerResponse = computerChoice();
+
+                System.out.print("\n########################################################################################################\n");
+                System.out.print("\nYour response (Rock, Paper, Scissor): ");
+                String playerResponse = sc.nextLine().toUpperCase();
+
+                while(!Pattern.compile("^(ROCK|PAPER|SCISSOR)$").matcher(playerResponse).find()) {
+                    System.out.println("Your response is invalid!\n");
+                    System.out.print("Your response (Rock, Paper, Scissor): ");
+                    playerResponse = sc.nextLine().toUpperCase();
                 }
+
+                System.out.println("You choose: " + playerResponse);
+                System.out.println("Computer choose: " + computerResponse);
+                getDecision(playerResponse, computerResponse);
+
+                getWinner();
             }
         }
     
@@ -133,6 +132,7 @@ public class Games {
     public class GuessNumber {
         private int scorePlayer = 0;
         private int round = 1;
+        public Scanner sc = new Scanner(System.in);
     
         // Instantiating Class
         GuessNumber() {
@@ -147,30 +147,28 @@ public class Games {
     
         // Start the Guess Number Game
         public void startGuessNumber() {
-            try (Scanner in = new Scanner(System.in)) {
-                while(round <= 5) {
-                    System.out.print("\n########################################################################################################\n");
-                    System.out.print("\nGuess a number (1-5): ");
-                    String playerGuess = in.nextLine();
-                    String randomNumber = randomNumbers();
-   
-                    while(!Pattern.compile("^(1|2|3|4|5)$").matcher(playerGuess).find()) {
-                        System.out.println("Your guess is invalid!\n");
-                        System.out.print("Guess a number (1-5): ");
-                        playerGuess = in.nextLine();
-                    }
-   
-                    if(playerGuess.equals(randomNumber)) {
-                        scorePlayer += 1;
-                        System.out.println("Random Number: " + randomNumber);
-                        System.out.println("Result: Your guess is correct!");
-                    } else {
-                        System.out.println("Random Number: " + randomNumber);
-                        System.out.println("Result: Your guess is incorrect!");
-                    }
-   
-                    round++;
+            while(round <= 5) {
+                System.out.print("\n########################################################################################################\n");
+                System.out.print("\nGuess a number (1-5): ");
+                String playerGuess = sc.nextLine();
+                String randomNumber = randomNumbers();
+
+                while(!Pattern.compile("^(1|2|3|4|5)$").matcher(playerGuess).find()) {
+                    System.out.println("Your guess is invalid!\n");
+                    System.out.print("Guess a number (1-5): ");
+                    playerGuess = sc.nextLine();
                 }
+
+                if(playerGuess.equals(randomNumber)) {
+                    scorePlayer += 1;
+                    System.out.println("Random Number: " + randomNumber);
+                    System.out.println("Result: Your guess is correct!");
+                } else {
+                    System.out.println("Random Number: " + randomNumber);
+                    System.out.println("Result: Your guess is incorrect!");
+                }
+
+                round++;
             }
         }
     
@@ -191,6 +189,7 @@ public class Games {
         private String[] choice = {"RED", "BLUE", "YELLOW", "WHITE"};
         private int round = 0;
         private int ticket = 0;
+        public Scanner sc = new Scanner(System.in);
     
         // Instantiating Class
         ColorGame() {
@@ -207,30 +206,28 @@ public class Games {
     
         // Start the Color Game
         public void startColorGame() {
-            try (Scanner inGuessNumber = new Scanner(System.in)) {
-                while(round < 5) {
-                    System.out.print("\n########################################################################################################\n");
+            while(round < 5) {
+                System.out.print("\n########################################################################################################\n");
+                System.out.print("\nGuess a color (RED, BLUE, YELLOW, WHITE): ");
+                String playerColor = sc.nextLine().toUpperCase();
+                String randomColors = randomColors();
+
+                while(!Pattern.compile("^(RED|BLUE|YELLOW|WHITE)$").matcher(playerColor).find()) {
+                    System.out.println("Your guess is invalid!\n");
                     System.out.print("\nGuess a color (RED, BLUE, YELLOW, WHITE): ");
-                    String playerColor = inGuessNumber.nextLine().toUpperCase();
-                    String randomColors = randomColors();
-   
-                    while(!Pattern.compile("^(RED|BLUE|YELLOW|WHITE)$").matcher(playerColor).find()) {
-                        System.out.println("Your guess is invalid!\n");
-                        System.out.print("\nGuess a color (RED, BLUE, YELLOW, WHITE): ");
-                        playerColor = inGuessNumber.nextLine().toUpperCase();
-                    }
-   
-                    if(playerColor.equals(randomColors)) {
-                        ticket += 1;
-                        System.out.println("Random Color: " + randomColors);
-                        System.out.println("Result: Your color guess is correct!");
-                    } else {
-                        System.out.println("Random Color: " + randomColors);
-                        System.out.println("Result: Your color guess is incorrect!");
-                    }
-   
-                    round++;
+                    playerColor = sc.nextLine().toUpperCase();
                 }
+
+                if(playerColor.equals(randomColors)) {
+                    ticket += 1;
+                    System.out.println("Random Color: " + randomColors);
+                    System.out.println("Result: Your color guess is correct!");
+                } else {
+                    System.out.println("Random Color: " + randomColors);
+                    System.out.println("Result: Your color guess is incorrect!");
+                }
+
+                round++;
             }
         }
     
